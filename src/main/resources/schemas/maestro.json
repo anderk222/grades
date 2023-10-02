@@ -1,0 +1,43 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "nombre",
+        "apellido",
+        "titulo"
+    ],
+    "properties": {
+        "nombre": {
+            "type": "string",
+            "default": "",
+            "title": "The nombre Schema",
+            "examples": [
+                "Anderson"
+            ]
+        },
+        "apellido": {
+            "type": "string",
+            "default": "",
+            "title": "The apellido Schema",
+            "examples": [
+                "Macias"
+            ]
+        },
+        "titulo": {
+            "type": "string",
+            "default": "",
+            "title": "The titulo Schema",
+            "examples": [
+                "Tecnologo Desarrollo de Software"
+            ]
+        }
+    },
+    "examples": [{
+        "nombre": "Anderson",
+        "apellido": "Macias",
+        "titulo": "Tecnologo Desarrollo de Software"
+    }]
+}
