@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "http://example.com/materia.json",
     "type": "object",
     "default": {},
     "title": "Root Schema",
@@ -20,6 +20,8 @@
             "type": "string",
             "default": "",
             "title": "The descripcion Schema",
+            "maxLength":100,
+            "minLength":2,
             "examples": [
                 "Matematicas"
             ]

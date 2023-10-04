@@ -2,32 +2,37 @@ package anderk222.grades.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import anderk222.grades.dto.Identificator;
 import anderk222.grades.entities.Nota;
 import anderk222.grades.services.NotaService;
 import anderk222.grades.validation.JsonValid;
 
-import static anderk222.grades.validation.SchemaLocations.NOTA;;
+import static anderk222.grades.validation.SchemaLocations.NOTA;
+import static anderk222.grades.validation.SchemaLocations.ID;;
 
 @RestController
 @RequestMapping("/api/grades/nota")
 @CrossOrigin("*")
 public class NotaController {
 
-    @Autowired
+    // Usar enum para errores
     private NotaService service;
+
+    public NotaController(NotaService service){
+
+        this.service = service;
+    }
+
 
     @GetMapping()
     public List<Nota> findAll() {
@@ -47,28 +52,30 @@ public class NotaController {
         return ResponseEntity.status(201).body(service.save(nota));
     }
 
-    @PutMapping("/{id}")
-    public Nota update(@RequestBody @JsonValid(NOTA) Nota nota, @PathVariable long id) {
+    @PostMapping("/update")
+    public Nota update(@RequestBody @JsonValid(NOTA) Nota nota) {
 
-        return service.update(nota, id);
+        return service.update(nota);
     }
 
-    @DeleteMapping("/{id}")
-    public Nota delete(@PathVariable long id) {
+    @PostMapping("/delete")
+    public Nota delete(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.delete(id);
+        return service.delete(data.getId());
     }
 
-    @GetMapping("/bestPromedio/{materiaId}/materia")
-    public List<Nota> bestPromedioByMateria(@PathVariable long materiaId,
+    @PostMapping("/bestPromedioByMateria")
+    public List<Nota> bestPromedioByMateria(
+            @RequestBody @JsonValid(ID) Identificator data,
             @RequestParam(name = "size", defaultValue = "2", required = false) int size) {
 
-        return service.bestPromedioByMateria(materiaId, size);
+        return service.bestPromedioByMateria(data.getId(), size);
     }
 
-    @GetMapping("/bestPromedio/{alumnoId}/alumno")
-    public List<Nota> bestPromedioByAlumno(@PathVariable long alumnoId) {
+    @PostMapping("/bestPromedioByAlumno")
+    public List<Nota> bestPromedioByAlumno(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.bestPromedioByAlumno(alumnoId);
+        return service.bestPromedioByAlumno(data.getId());
+
     }
 }

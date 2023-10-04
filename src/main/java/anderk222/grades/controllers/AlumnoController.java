@@ -1,12 +1,9 @@
 package anderk222.grades.controllers;
 
 import java.util.List;
-// import static anderk222.grades.validation.SchemaLocations.MATERIA;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,19 +13,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import anderk222.grades.dto.Identificator;
 import anderk222.grades.entities.Alumno;
 import anderk222.grades.services.AlumnoService;
 import anderk222.grades.validation.JsonValid;
-import static anderk222.grades.validation.SchemaLocations.ALUMNO;;
+import static anderk222.grades.validation.SchemaLocations.ALUMNO;
+import static anderk222.grades.validation.SchemaLocations.ID;
+
 
 @RestController
 @RequestMapping("/api/grades/alumno")
 @CrossOrigin("*")
 public class AlumnoController {
 
-    @Autowired
     private AlumnoService service;
+
+    public AlumnoController(AlumnoService service){
+
+        this.service = service;
+
+    }
 
     @GetMapping()
     public List<Alumno> findAll() {
@@ -42,10 +46,17 @@ public class AlumnoController {
 
     }
 
-    @GetMapping("/count/{maestroId}/maestro")
-    public int countByMaestro(@PathVariable long maestroId) {
+    @PostMapping("/countByMaestro")
+    public int countByMaestro(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.countByMaestro(maestroId);
+        return service.countByMaestro(data.getId());
+
+    }
+
+    @PostMapping("/findByMaestro")
+    public List<Alumno> findByMaestro(@RequestBody @JsonValid(ID) Identificator data ){
+
+        return service.findByMaestro(data.getId());
 
     }
 
@@ -55,16 +66,16 @@ public class AlumnoController {
         return ResponseEntity.status(201).body(service.save(alumno));
     }
 
-    @PutMapping("/{id}")
-    public Alumno update(@RequestBody @JsonValid(ALUMNO) Alumno alumno, @PathVariable long id) {
+    @PutMapping("/update")
+    public Alumno update(@RequestBody @JsonValid(ALUMNO) Alumno alumno) {
 
-        return service.update(alumno, id);
+        return service.update(alumno);
     }
 
-    @DeleteMapping("/{id}")
-    public Alumno delete(@PathVariable long id) {
+    @PostMapping("/delete")
+    public Alumno delete(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.delete(id);
+        return service.delete(data.getId());
     }
 
     @GetMapping("/search")

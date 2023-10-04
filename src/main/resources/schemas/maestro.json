@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "http://example.com/maestro.json",
     "type": "object",
     "default": {},
     "title": "Root Schema",
@@ -14,6 +14,8 @@
             "type": "string",
             "default": "",
             "title": "The nombre Schema",
+            "maxLength":45,
+            "minLength":2,
             "examples": [
                 "Anderson"
             ]
@@ -22,6 +24,8 @@
             "type": "string",
             "default": "",
             "title": "The apellido Schema",
+            "maxLength":45,
+            "minLength":2,
             "examples": [
                 "Macias"
             ]
@@ -30,6 +34,8 @@
             "type": "string",
             "default": "",
             "title": "The titulo Schema",
+            "maxLength":100,
+            "minLength":2,
             "examples": [
                 "Tecnologo Desarrollo de Software"
             ]

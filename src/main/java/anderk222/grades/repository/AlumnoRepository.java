@@ -10,6 +10,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
     
     int countByMaestroId(long maestroId);
 
+    List<Alumno> findByMaestroId(long maestroId);
+
     List<Alumno> findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(String nombre,String apellido);
 
 }

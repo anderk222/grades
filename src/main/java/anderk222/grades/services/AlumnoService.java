@@ -36,11 +36,9 @@ public class AlumnoService {
 
     }
 
-    public Alumno update(Alumno alumno, long id) {
+    public Alumno update(Alumno alumno) {
 
-        this.find(id);
-
-        alumno.setId(id);
+        this.find(alumno.getId());
 
         return repository.save(alumno);
 
@@ -63,8 +61,14 @@ public class AlumnoService {
     }
 
     public int countByMaestro(long maestroId) {
+
         return repository.countByMaestroId(maestroId);
 
+    }
+
+    public List<Alumno> findByMaestro(long maestroid){
+
+        return repository.findByMaestroId(maestroid);
     }
 
 }

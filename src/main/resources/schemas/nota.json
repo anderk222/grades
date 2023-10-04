@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "http://example.com/nota.json",
     "type": "object",
     "default": {},
     "title": "Root Schema",
@@ -30,6 +30,7 @@
                     "type": "integer",
                     "default": 0,
                     "title": "The id Schema",
+                    "exclusiveMinimun" : 1,
                     "examples": [
                         1
                     ]
@@ -51,9 +52,11 @@
                     "type": "integer",
                     "default": 0,
                     "title": "The id Schema",
+                    "minimum" : 1,
                     "examples": [
                         1
                     ]
+                    
                 }
             },
             "examples": [{
@@ -64,6 +67,8 @@
             "type": "number",
             "default": 0.0,
             "title": "The puntos Schema",
+            "minimum" : 0,
+            "maximum" : 10,
             "examples": [
                 5.45
             ]

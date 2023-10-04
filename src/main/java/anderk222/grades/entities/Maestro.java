@@ -1,5 +1,6 @@
 package anderk222.grades.entities;
 
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -33,5 +34,11 @@ public class Maestro {
 
     @JsonIgnore
     private boolean deleted = false;
+
+    // @JsonProperty(access = Access.READ_ONLY)
+    // @OneToMany(mappedBy = "maestro")
+    // @JsonIgnore
+    
+    // private List<Alumno> alumnos = new ArrayList<>();
 
 }

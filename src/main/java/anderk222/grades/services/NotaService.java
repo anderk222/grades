@@ -39,11 +39,9 @@ public class NotaService {
 
     }
 
-    public Nota update(Nota nota, long id) {
+    public Nota update(Nota nota) {
 
-        this.find(id);
-
-        nota.setId(id);
+        this.find(nota.getId());
 
         return repository.save(nota);
 
