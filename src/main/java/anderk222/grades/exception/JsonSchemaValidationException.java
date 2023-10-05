@@ -16,8 +16,8 @@ public class JsonSchemaValidationException extends ResponseStatusException {
         this.validationMessages = validationMessages;
     }
 
-    private static String buildMessage(Collection<ValidationMessage> validationMessages) {
-        final String prefix = "JsonSchemaValidation failed: ";
+    public static String buildMessage(Collection<ValidationMessage> validationMessages) {
+        final String prefix = "";
         return prefix + validationMessages
                 .stream()
                 .map(ValidationMessage::toString)

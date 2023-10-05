@@ -26,7 +26,7 @@ public class ExeptionHandler {
     public ResponseEntity<Response> handleJsonSchemaValidationException(JsonSchemaValidationException ex) {
 
 
-        Response response = Response.resEnum(ResponseEnum.BAD_REQUEST).msgUsuario(ex.getMessage());
+        Response response = Response.resEnum(ResponseEnum.BAD_REQUEST).msgUsuario(ex.getReason());
 
         return ResponseEntity.ok(response);
 
