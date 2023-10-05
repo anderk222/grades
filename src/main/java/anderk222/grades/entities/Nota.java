@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,21 +26,25 @@ public class Nota {
 
     @Id()
     @GeneratedValue(strategy =GenerationType.AUTO )
+    @Expose
     private Long id;
     
     @ManyToOne()
     @JoinColumn(name = "Materia_idMateria", referencedColumnName = "id_materia")
+    @Expose
     private Materia materia;
 
     @ManyToOne()
     @JoinColumn(name = "Alumno_idAlumno", referencedColumnName = "id_alumno")
+    @Expose
     private Alumno alumno;
 
     @Column(precision = 10, scale = 2)
+    @Expose
     private BigDecimal puntos = BigDecimal.ZERO;
 
 
-    @JsonIgnore
+    @Expose(serialize = false, deserialize = false)
     private boolean deleted = false;
 
 }

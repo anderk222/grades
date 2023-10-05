@@ -33,8 +33,6 @@ public class NotaService {
 
     public Nota save(Nota nota) {
 
-        nota.setId(0l);
-
         return repository.save(nota);
 
     }

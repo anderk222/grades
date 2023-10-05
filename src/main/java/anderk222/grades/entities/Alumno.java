@@ -3,7 +3,7 @@ package anderk222.grades.entities;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,17 +23,22 @@ public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_alumno")
+    @Expose
     private Long id;
 
     @Column(length = 45, nullable = false)
+    @Expose
     private String nombre;
+    
     @Column(length = 45, nullable = false)
+    @Expose
     private String apellido;
 
     @ManyToOne()
     @JoinColumn(name = "maestro_idMaestro", referencedColumnName = "id_maestro")
+    @Expose
     private Maestro maestro;
 
-    @JsonIgnore
+    @Expose(serialize = false, deserialize = false)
     private boolean deleted = false;
 }

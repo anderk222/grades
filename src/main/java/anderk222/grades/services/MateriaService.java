@@ -36,11 +36,9 @@ public class MateriaService {
 
     }
 
-    public Materia update(Materia materia, long id) {
+    public Materia update(Materia materia) {
 
-        this.find(id);
-
-        materia.setId(id);
+        this.find(materia.getId());
 
         return repository.save(materia);
 

@@ -1,8 +1,6 @@
 package anderk222.grades.controllers;
 
-import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import anderk222.grades.dto.Identificator;
+import anderk222.grades.dto.Response;
 import anderk222.grades.entities.Alumno;
 import anderk222.grades.services.AlumnoService;
 import anderk222.grades.validation.JsonValid;
@@ -35,58 +34,59 @@ public class AlumnoController {
     }
 
     @GetMapping()
-    public List<Alumno> findAll() {
-        return service.findAll();
+    public Response findAll() {
+
+        return Response.body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public Alumno find(@PathVariable long id) {
+    public Response find(@PathVariable long id) {
 
-        return service.find(id);
+        return Response.body(service.find(id));
 
     }
 
     @PostMapping("/countByMaestro")
-    public int countByMaestro(@RequestBody @JsonValid(ID) Identificator data) {
+    public Response countByMaestro(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.countByMaestro(data.getId());
+        return Response.body(service.countByMaestro(data.getId()));
 
     }
 
     @PostMapping("/findByMaestro")
-    public List<Alumno> findByMaestro(@RequestBody @JsonValid(ID) Identificator data ){
+    public Response findByMaestro(@RequestBody @JsonValid(ID) Identificator data ){
 
-        return service.findByMaestro(data.getId());
+        return Response.body(service.findByMaestro(data.getId()));
 
     }
 
     @PostMapping()
-    public ResponseEntity<Alumno> save(@RequestBody @JsonValid(ALUMNO) Alumno alumno) {
+    public Response save(@RequestBody @JsonValid(ALUMNO) Alumno alumno) {
 
-        return ResponseEntity.status(201).body(service.save(alumno));
+        return Response.body(service.save(alumno));
     }
 
     @PutMapping("/update")
-    public Alumno update(@RequestBody @JsonValid(ALUMNO) Alumno alumno) {
+    public Response update(@RequestBody @JsonValid(ALUMNO) Alumno alumno) {
 
-        return service.update(alumno);
+        return Response.body(service.update(alumno));
     }
 
     @PostMapping("/delete")
-    public Alumno delete(@RequestBody @JsonValid(ID) Identificator data) {
+    public Response delete(@RequestBody @JsonValid(ID) Identificator data) {
 
-        return service.delete(data.getId());
+        return Response.body(service.delete(data.getId()));
     }
 
     @GetMapping("/search")
-    public List<Alumno> findByFullName(
+    public Response findByFullName(
 
     @RequestParam(name = "nombre", defaultValue = "", required = false) String nombre,
     @RequestParam(name = "apellido", defaultValue = "", required = false) String apellido
 
     ){
 
-        return service.findByFullName(nombre, apellido);
+        return Response.body(service.findByFullName(nombre, apellido));
 
     }
 

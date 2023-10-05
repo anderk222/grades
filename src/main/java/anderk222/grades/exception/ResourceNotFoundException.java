@@ -4,8 +4,6 @@ package anderk222.grades.exception;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  *
@@ -14,7 +12,6 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-@ResponseStatus(value=HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
 
     private String resourceName;

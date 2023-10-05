@@ -1,24 +1,23 @@
 package anderk222.grades.controllers;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import anderk222.grades.dto.Identificator;
 import anderk222.grades.entities.Materia;
 import anderk222.grades.services.MateriaService;
 import anderk222.grades.validation.JsonValid;
-
 import static anderk222.grades.validation.SchemaLocations.MATERIA;
+import static anderk222.grades.validation.SchemaLocations.ID;
+import anderk222.grades.dto.Response;
+
 
 @RestController
 @RequestMapping("/api/grades/materia")
@@ -30,33 +29,34 @@ public class MateriaController {
 
 
     @GetMapping()
-    public List<Materia> findAll(){
-        return service.findAll();
+    public Response findAll(){
+
+        return Response.body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public Materia find(@PathVariable long id){
+    public Response find(@PathVariable long id){
 
-        return service.find(id);
+        return Response.body(service.find(id));
 
     }
 
     @PostMapping()
-    public ResponseEntity<Materia> save(@RequestBody @JsonValid(MATERIA) Materia materia){
+    public Response save(@RequestBody @JsonValid(MATERIA) Materia materia){
 
-        return ResponseEntity.status(201).body(service.save(materia));
+        return Response.body(service.save(materia));
     }
 
-    @PutMapping("/{id}")
-    public Materia update(@RequestBody @JsonValid(MATERIA) Materia materia, @PathVariable long id){
+    @PostMapping("/update")
+    public Response update(@RequestBody @JsonValid(MATERIA) Materia materia){
 
-        return service.update(materia, id);
+        return Response.body(service.update(materia));
     }
 
-    @DeleteMapping("/{id}")
-    public Materia delete(@PathVariable long id){
+    @PostMapping("/delete")
+    public Response delete(@RequestBody @JsonValid(ID) Identificator data){
 
-        return service.delete(id);
+        return Response.body(service.delete(data.getId()));
     }
 
 }

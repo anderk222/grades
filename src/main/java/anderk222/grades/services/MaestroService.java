@@ -31,17 +31,15 @@ public class MaestroService {
 
     public Maestro save(Maestro maestro){
 
-        maestro.setId(0l);
 
         return repository.save(maestro);
 
     }
 
-    public Maestro update(Maestro maestro, long id){
+    public Maestro update(Maestro maestro){
 
-        this.find(id);
+        this.find(maestro.getId());
 
-        maestro.setId(id);
 
         return repository.save(maestro);
 
